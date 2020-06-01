@@ -1,4 +1,5 @@
 import 'package:atg_chatapp/screens/chatPage.dart';
+import 'package:atg_chatapp/screens/createGroup.dart';
 import 'package:atg_chatapp/screens/feedPage.dart';
 import 'package:atg_chatapp/screens/loginPage.dart';
 import 'package:atg_chatapp/screens/registerPage.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/chat': (context) => ChatPage(),
         '/register': (context) => RegisterPage(),
         '/search': (context) => Searchpage(),
+        '/createGroup': (context) => CreateGroup(),
       },
     );
   }

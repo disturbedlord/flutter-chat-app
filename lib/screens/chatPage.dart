@@ -33,7 +33,8 @@ class _ChatPageState extends State<ChatPage> {
                     return MessageTile(
                         snapshot.data.documents[index].data["message"],
                         snapshot.data.documents[index].data["sendBy"] ==
-                            constants.myEmail);
+                            constants.myEmail,
+                        snapshot.data.documents[index].data["sendBy"]);
                   })
               : Container();
         });
@@ -115,7 +116,8 @@ class _ChatPageState extends State<ChatPage> {
 class MessageTile extends StatelessWidget {
   final String message;
   final bool isSendByMe;
-  MessageTile(this.message, this.isSendByMe);
+  final String sender;
+  MessageTile(this.message, this.isSendByMe, this.sender);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -124,23 +126,33 @@ class MessageTile extends StatelessWidget {
       alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-        child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-            decoration: BoxDecoration(
-                color: isSendByMe ? Colors.greenAccent : Colors.black54,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                    bottomLeft:
-                        isSendByMe ? Radius.circular(15) : Radius.circular(0),
-                    bottomRight:
-                        isSendByMe ? Radius.circular(0) : Radius.circular(15))
-                // border: Border.fromBorderSide()
-                ),
-            child: Text(
-              message,
-              style: TextStyle(fontSize: 30.sp, color: Colors.black),
-            )),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+              decoration: BoxDecoration(
+                  color: isSendByMe ? Colors.greenAccent : Colors.black54,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                      bottomLeft:
+                          isSendByMe ? Radius.circular(15) : Radius.circular(0),
+                      bottomRight:
+                          isSendByMe ? Radius.circular(0) : Radius.circular(15))
+                  // border: Border.fromBorderSide()
+                  ),
+              child: Text(
+                message,
+                style: TextStyle(fontSize: 30.sp, color: Colors.black),
+              ),
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Text(isSendByMe ? "" : sender)
+          ],
+        ),
       ),
     );
   }

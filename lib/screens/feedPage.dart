@@ -34,10 +34,6 @@ class _FeedPageState extends State<FeedPage> {
                     return ChatRoomTile(
                         snapshot.data.documents[index].data["chatroomid"]
                             .toString()
-                            .replaceAll(
-                              "_",
-                              "",
-                            )
                             .replaceAll(constants.myEmail, ""),
                         snapshot.data.documents[index].data["chatroomid"]
                             .toString());
@@ -98,6 +94,16 @@ class _FeedPageState extends State<FeedPage> {
           icon: Icon(Icons.arrow_back),
         ),
         actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/createGroup');
+            },
+            icon: Icon(
+              Icons.add_circle_outline,
+              color: Colors.black,
+              size: 60.h,
+            ),
+          ),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/search');
@@ -248,12 +254,15 @@ class ChatRoomTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ChatPage(
-                      chatRoomId: chatRoom,
-                      chatPersonName: userName,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatPage(
+                chatRoomId: chatRoom,
+                chatPersonName: userName.split("@").length == 2
+                    ? userName.replaceAll("_", "")
+                    : userName.substring(0, userName.indexOf("_"))),
+          ),
+        );
       },
       child: Padding(
         padding:
@@ -277,12 +286,17 @@ class ChatRoomTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(1000),
                     ),
                     child: Text(
-                      userName.substring(0, 1).toUpperCase(),
+                      userName
+                          .replaceAll("_", "")
+                          .substring(0, 1)
+                          .toUpperCase(),
                       style: TextStyle(color: Colors.white, fontSize: 50.sp),
                     ),
                   ),
                   SizedBoxWidth(width: 10),
-                  Text(userName),
+                  Text(userName.split("@").length == 2
+                      ? userName.replaceAll("_", "")
+                      : userName.substring(0, userName.indexOf("_"))),
                 ],
               ),
             ),
