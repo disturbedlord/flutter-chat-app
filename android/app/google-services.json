@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "988538432567",
+    "firebase_url": "https://atg-chat-app.firebaseio.com",
+    "project_id": "atg-chat-app",
+    "storage_bucket": "atg-chat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988538432567:android:f1415cac4d6c1c1b03a3b2",
+        "android_client_info": {
+          "package_name": "com.example.atg_chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988538432567-cmle2sm8c2l7msovde02jqnpbespma2r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvvSe6TpweB794IGO6uTE_O9BxLqF0nUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988538432567-cmle2sm8c2l7msovde02jqnpbespma2r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
