@@ -19,12 +19,14 @@ class _CreateGroupState extends State<CreateGroup> {
   createGroupChatRoom({email, people}) {
     List<String> users = [email, constants.myEmail];
     people.add(constants.myEmail);
+    print("email");
     print(email);
-    String chatRoomId = getChatRoomId(users[0], users[1]);
+    var chatRoomId = users[0] + users[1];
 
     Map<String, dynamic> chatRoomMap = {
       "users": people,
-      "chatroomid": chatRoomId
+      "chatroomid": chatRoomId.toString(),
+      "lastUsed": DateTime.now().millisecondsSinceEpoch
     };
 
     DataBase().createChatroom(chatRoomId, chatRoomMap);

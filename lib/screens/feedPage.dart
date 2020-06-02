@@ -27,6 +27,11 @@ class _FeedPageState extends State<FeedPage> {
     return StreamBuilder(
         stream: chatRoomStream,
         builder: (context, snapshot) {
+          if (snapshot.hasData == null) {
+            setState(() {
+              hadContacts = false;
+            });
+          }
           return snapshot.hasData
               ? ListView.builder(
                   itemCount: snapshot.data.documents.length,
@@ -46,7 +51,7 @@ class _FeedPageState extends State<FeedPage> {
     return col[r.nextInt(4)];
   }
 
-  bool hadContacts = false;
+  bool hadContacts = true;
 
   @override
   void initState() {
@@ -64,7 +69,8 @@ class _FeedPageState extends State<FeedPage> {
         db.getChatRooms(constants.myEmail).then((val) {
           setState(() {
             chatRoomStream = val;
-            hadContacts = true;
+            print(val.toString());
+            if (val != null) hadContacts = true;
           });
         });
         print(loggedInUser.email);
@@ -89,7 +95,7 @@ class _FeedPageState extends State<FeedPage> {
         leading: IconButton(
           color: Colors.black,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/');
           },
           icon: Icon(Icons.arrow_back),
         ),

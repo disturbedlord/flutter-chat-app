@@ -49,7 +49,8 @@ class _SearchpageState extends State<Searchpage> {
 
       Map<String, dynamic> chatRoomMap = {
         "users": users,
-        "chatroomid": chatRoomId
+        "chatroomid": chatRoomId,
+        "lastUsed": DateTime.now().millisecondsSinceEpoch,
       };
 
       DataBase().createChatroom(chatRoomId, chatRoomMap);

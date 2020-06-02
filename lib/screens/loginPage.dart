@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:toast/toast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -105,6 +106,12 @@ class _LoginPageState extends State<LoginPage> {
                             _showSpinner = false;
                           });
                         } catch (e) {
+                          Toast.show("The credentials are Invalid", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM);
+                          setState(() {
+                            _showSpinner = false;
+                          });
                           print(e);
                         }
                       },

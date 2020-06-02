@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:atg_chatapp/modals/DataBase.dart';
 import 'package:atg_chatapp/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,6 +30,7 @@ class _ChatPageState extends State<ChatPage> {
         builder: (context, snapshot) {
           return snapshot.hasData
               ? ListView.builder(
+                  shrinkWrap: true,
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (context, index) {
                     return MessageTile(
@@ -49,6 +52,7 @@ class _ChatPageState extends State<ChatPage> {
       };
       db.addConversationMessages(widget.chatRoomId, messageMap);
       messageController.clear();
+      db.setChatRoom(widget.chatRoomId, DateTime.now().millisecondsSinceEpoch);
     }
   }
 
@@ -75,39 +79,39 @@ class _ChatPageState extends State<ChatPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushNamed(context, '/feed'),
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
         ),
       ),
       body: SafeArea(
-          child: Container(
-        child: Stack(
-          children: <Widget>[
-            ChatMessageList(),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.w),
-                child: TextField(
-                  controller: messageController,
-                  decoration: InputDecoration(
-                    labelText: "Type a message",
-                    hasFloatingPlaceholder: false,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    suffixIcon: GestureDetector(
-                        onTap: () {
-                          sendMessage();
-                        },
-                        child: Icon(Icons.send)),
+          child: Column(
+        children: <Widget>[
+          Expanded(flex: 7, child: Container(child: ChatMessageList())),
+          Container(
+            // height: 0.h,
+            color: Colors.transparent,
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 0.w),
+              child: TextField(
+                controller: messageController,
+                decoration: InputDecoration(
+                  labelText: "Type a message",
+                  hasFloatingPlaceholder: false,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  suffixIcon: GestureDetector(
+                      onTap: () {
+                        sendMessage();
+                      },
+                      child: Icon(Icons.send)),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       )),
     );
   }

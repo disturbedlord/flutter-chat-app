@@ -43,9 +43,26 @@ class DataBase {
   }
 
   getChatRooms(String email) async {
-    return await Firestore.instance
+    var ref = await Firestore.instance
         .collection("ChatRoom")
-        .where("users", arrayContains: email)
-        .snapshots();
+        .where("users", arrayContains: email);
+
+    var querySnapshot = await ref.getDocuments();
+    var total = querySnapshot.documents.length;
+
+    if (total > 0) {
+      return await ref.orderBy("lastUsed", descending: true).snapshots();
+    } else {
+      return await ref.snapshots();
+    }
+  }
+
+  setChatRoom(String chatRoomId, lastUsed) {
+    Firestore.instance
+        .collection("ChatRoom")
+        .document(chatRoomId)
+        .updateData({"lastUsed": lastUsed}).catchError((e) {
+      print(e);
+    });
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:toast/toast.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -120,6 +121,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                     } catch (e) {
                       print(e);
+                      Toast.show("Already Exist/Badly formatted", context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                     }
                     setState(() {
                       _showSpinner = false;
