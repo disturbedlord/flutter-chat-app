@@ -1,9 +1,9 @@
 {
   "project_info": {
     "project_number": "988538432567",
-    "firebase_url": "https://atg-chat-app.firebaseio.com",
-    "project_id": "atg-chat-app",
-    "storage_bucket": "atg-chat-app.appspot.com"
+    "firebase_url": "https://atg-chat-app1.firebaseio.com",
+    "project_id": "atg-chat-app1",
+    "storage_bucket": "atg-chat-app1.appspot.com"
   },
   "client": [
     {
